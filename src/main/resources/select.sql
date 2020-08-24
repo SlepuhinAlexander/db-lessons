@@ -80,7 +80,7 @@ FROM author u
 LEFT JOIN article a
 ON u.author_id = a.author_id;
 
--- полльзователи,  которые не писали статей
+-- пользователи,  которые не писали статей
 SELECT u.name
 FROM author u
 LEFT JOIN article a

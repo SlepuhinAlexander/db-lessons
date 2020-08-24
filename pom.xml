@@ -11,10 +11,8 @@
     <properties>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-
     </properties>
 
     <dependencies>
@@ -23,6 +21,55 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.12</version>
             <scope>runtime</scope>
+        </dependency>
+        <!--пул соединений-->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.5</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+        <!-- Загрузка спецификации JPA из java eXtensions пакетов -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
+        <!-- Конкретный ORM - реализация JPA - под названием eclipselink -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>2.7.7</version>
+            <!--      Для генерации статических метамоделей (статический доступ к метаданным класса):
+                    File -> Settings -> Build.Execution.Deployment -> Compiler -> Annotations Processor:
+                      в поле слева выбрать проект,
+                      в поле: Annotations Processors нажать на + и добавить строку:
+                  org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor
+                  можно указать директорию для сгенерированных классов
+                  Подтвердить изменения, закрыть окно.
+                  Директория со сгенерированными файлами должна быть отмечена, как Generated Sources Root
+                  (правой кнопкой мыши -> Mark Directory As -> Generated Sources Root)-->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <!--
+            Библиотека для автоматической генерации стандартных конструкторов и методов: геттеров, сеттеров, toString,
+            equals и hashCode
+        -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

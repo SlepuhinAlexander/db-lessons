@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+    <!--
+        persistence-unit - огранизационная единица.
+        описываемый основной объект работы ORM будет иметь указание на persistence-unit, с которым он должен работать.
+        т.е. пойти в эти настройки, получить подключение к БД, набор классов, которые нужно обработать и так далее.
+    -->
+    <persistence-unit name="ormLesson" transaction-type="RESOURCE_LOCAL">
+        <!--
+            перечисление всех классов, которые должны стать сущностями (указывается полное имя класса)
+            это указание для ORM, что данный класс необходимо обработать и если он размечен, создать на его основе
+            таблицу.
+        -->
+        <class>ifmo.jjd.jpa.entity.TextMessage</class>
+        <class>ifmo.jjd.jpa.entity.Student</class>
+        <class>ifmo.jjd.jpa.entity.StudentInfo</class>
+        <class>ifmo.jjd.jpa.entity.Group</class>
+
+        <properties>
+            <!-- Обязательные настройки подключения к БД -->
+            <!-- Строка подключения к бд -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/db_lessons"/>
+            <!-- Логин пользователя бд -->
+            <property name="javax.persistence.jdbc.user" value="jjdbd"/>
+            <!-- Пароль пользователя бд -->
+            <property name="javax.persistence.jdbc.password" value="Pr!v333t"/>
+            <!-- Используемый драйвер -->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+            <!--
+                Настройки логгирования для логгера.
+                По умолчанию берёт стандартный логгер.
+                При необходимости можно передать используемый логгер, подключенный к проекту.
+            -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <!-- Настройки как создавать таблицы -->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <!--
+                варианты:
+                    - none - ничего не делать
+                    - create-tables - создавать новые таблицы, если их нет
+                    - drop-and-create-tables - удалять и пересоздавать таблицы
+            -->
+            <!-- Настройки для пула встроенного соединений. Но можно и свой пул соединений подключить -->
+            <property name="eclipselink.connection-pool.default.initial" value="5"/>
+            <property name="eclipselink.connection-pool.default.min" value="3"/>
+            <property name="eclipselink.connection-pool.default.max" value="10"/>
+
+            <!--            отключение кэша-->
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <!-- загрузка sql скрипта -->
+            <!-- если нужно выполнить SQL-скрипт(ы) перед запуском программы -->
+            <!--            <property name="javax.persistence.sql-load-script-source" -->
+            <!--                      value="META-INF/path_to_sql.sql" />-->
+        </properties>
+    </persistence-unit>
+</persistence>
